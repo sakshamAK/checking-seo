@@ -89,18 +89,18 @@ export default function Seo() {
 			<div className="flex flex-col items-center w-full gap-4">
 				<div className="flex items-center justify-center flex-col lg:items-end lg:flex-row w-full gap-4 lg:w-3/4 lg:gap-16">
 					<div className="flex items-center justify-center flex-col w-full gap-4 lg:w-3/4 lg:gap-8">
-						<h4 className="text-center sm:text-xl">
+						<h4 className="dark:text-black text-center sm:text-xl">
 							Enter URL without "https" or "http", and "www"
 						</h4>
 						<input
 							type="text"
 							placeholder='Enter URL without "https" or "http", and "www"'
-							className="px-4 py-2 w-full md:px-8 md:py-4 md:text-xl lg:text-3xl rounded-xl lg:rounded-3xl outline-black-500 backdrop-blur-md bg-white/70 border-2 border-solid border-black-500"
+							className="dark:text-black px-4 py-2 w-full md:px-8 md:py-4 md:text-xl lg:text-3xl rounded-xl lg:rounded-3xl outline-black-500 backdrop-blur-md bg-white/70 border-2 border-solid border-black-500"
 							onChange={(e) => checkValidity(e)}
 						/>
 					</div>
 					<ArrowRightCircleIcon
-						className="h-16 w-16 md:h-20 md:w-20 hover:text-red-400 cursor-pointer active:ml-10 transition-all text-black"
+						className="dark:text-black h-16 w-16 md:h-20 md:w-20 hover:text-red-400 cursor-pointer active:ml-10 transition-all text-black"
 						onClick={() => !disableButton && setTaskId()}
 					/>
 				</div>
