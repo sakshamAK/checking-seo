@@ -11,8 +11,8 @@ import {
 
 export class SeoDetails {
 	private auth: Auth = {
-		username: "fetel85659@ipnuc.com",
-		password: "67f997477b4149e2",
+		username: "saksham.8484@gmail.com",
+		password: "d1d1c3ee27279849",
 	};
 
 	constructor() {}

@@ -61,7 +61,7 @@ export default function Seo() {
 					setLoading(false);
 					clearInterval(summaryCheck);
 				}
-			}, 1000);
+			}, 3000);
 
 			detailsCheck = setInterval(async () => {
 				const resDetails = taskId && (await dataForSeo.getSeoDetails(taskId));
@@ -79,7 +79,7 @@ export default function Seo() {
 					setDetails(resDetails);
 					clearInterval(detailsCheck);
 				}
-			}, 1000);
+			}, 3000);
 		} catch (e) {
 			console.error(e);
 		}
