@@ -35,42 +35,54 @@ export default function Seo() {
 	};
 
 	const setTaskId = async () => {
-		setLoading(true);
-		setDisableButton(true);
-		const taskId = await dataForSeo.sendUrl(clientURL);
-		let summaryCheck: ReturnType<typeof setInterval>;
-		let detailsCheck: ReturnType<typeof setInterval>;
+		try {
+			setLoading(true);
+			setDisableButton(true);
+			const taskId = await dataForSeo.sendUrl(clientURL);
+			// const checkQueue = await dataForSeo.checkStatusQueue();
+			
+			let summaryCheck: ReturnType<typeof setInterval>;
+			let detailsCheck: ReturnType<typeof setInterval>;
+			
+			summaryCheck = setInterval(async () => {
+				const resSummary = taskId && (await dataForSeo.getSeoSummary(taskId));
+				if (resSummary?.status_message === "Task Not Found.") {
+					setDisableButton(false);
+					setLoading(false);
+					clearInterval(summaryCheck);
+					setValidateURL("Please check the URL!");
+				}
+				if (
+					resSummary?.result &&
+					resSummary?.result[0]?.crawl_progress === "finished"
+				) {
+					setDisableButton(false);
+					setSummary(resSummary);
+					setLoading(false);
+					clearInterval(summaryCheck);
+				}
+			}, 1000);
 
-		summaryCheck = setInterval(async () => {
-			const resSummary = taskId && (await dataForSeo.getSeoSummary(taskId));
-			if (resSummary?.status_message === "Task Not Found.") {
-				setDisableButton(false);
-				setLoading(false);
-				clearInterval(summaryCheck);
-                setValidateURL("Please check the URL!")
-			}
-			if (resSummary?.result[0]?.crawl_progress === "finished") {
-				setDisableButton(false);
-				setSummary(resSummary);
-				setLoading(false);
-				clearInterval(summaryCheck);
-			}
-		}, 1000);
-
-		detailsCheck = setInterval(async () => {
-			const resDetails = taskId && (await dataForSeo.getSeoDetails(taskId));
-			if (resDetails?.status_message === "Task Not Found.") {
-				setDisableButton(false);
-				setLoading(false);
-				clearInterval(detailsCheck);
-                setValidateURL("Please check the URL!")
-			}
-			if (resDetails?.result[0]?.crawl_progress === "finished") {
-				setDisableButton(false);
-				setDetails(resDetails);
-				clearInterval(detailsCheck);
-			}
-		}, 1000);
+			detailsCheck = setInterval(async () => {
+				const resDetails = taskId && (await dataForSeo.getSeoDetails(taskId));
+				if (resDetails?.status_message === "Task Not Found.") {
+					setDisableButton(false);
+					setLoading(false);
+					clearInterval(detailsCheck);
+					setValidateURL("Please check the URL!");
+				}
+				if (
+					resDetails?.result &&
+					resDetails?.result[0]?.crawl_progress === "finished"
+				) {
+					setDisableButton(false);
+					setDetails(resDetails);
+					clearInterval(detailsCheck);
+				}
+			}, 1000);
+		} catch (e) {
+			console.error(e);
+		}
 	};
 	return (
 		<main className="flex min-h-screen items-center justify-center gap-20 p-8 md:p-16 lg:p-24">
@@ -88,7 +100,7 @@ export default function Seo() {
 						/>
 					</div>
 					<ArrowRightCircleIcon
-						className="h-16 w-16 md:h-20 md:w-20 cursor-pointer active:ml-10 transition-all text-black"
+						className="h-16 w-16 md:h-20 md:w-20 hover:text-red-400 cursor-pointer active:ml-10 transition-all text-black"
 						onClick={() => !disableButton && setTaskId()}
 					/>
 				</div>

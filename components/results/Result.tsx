@@ -3,7 +3,7 @@ import { SeoResultsProps } from "./types";
 
 export function SeoResults({ summary, details }: SeoResultsProps) {
 	return (
-		<main className="flex flex-col min-h-screen items-center justify-center gap-20 p-24">
+		<main className="flex flex-col items-center justify-center gap-20 p-24">
 			{summary && summary?.result && (
 				<div className="flex flex-col items-start w-full min-h-screen gap-16">
 					<h1 className="text-6xl">Summary: </h1>

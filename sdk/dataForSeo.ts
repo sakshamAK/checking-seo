@@ -83,7 +83,6 @@ export class SeoDetails {
 				},
 			});
 			const clientSeoDetails = await getClientSeoDetails["data"]["tasks"][0];
-			console.log(clientSeoDetails.status_message);
 
 			return clientSeoDetails;
 		} catch (error) {

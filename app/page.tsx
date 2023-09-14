@@ -9,7 +9,7 @@ export default function Home() {
 					Make Search Engine Optimization Easy
 				</h1>
 				<Link href="seo-generator">
-					<ArrowRightCircleIcon className="h-24 w-24 lg:h-28 lg:w-28 cursor-pointer active:ml-10 transition-all" />
+					<ArrowRightCircleIcon className="h-24 w-24 lg:h-28 lg:w-28 hover:h-36 hover:w-36 hover:text-red-400 cursor-pointer active:ml-10 transition-all" />
 				</Link>
 			</div>
 		</main>
